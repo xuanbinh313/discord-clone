@@ -10,7 +10,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ChevronDown, LogOut, PlusCircle, Settings, Trash, UserPlus } from 'lucide-react'
+import { ChevronDown, LogOut, PlusCircle, Settings, Trash, User, UserPlus } from 'lucide-react'
 import { useModal } from '@/hooks/use-modal-store'
 
 interface ServerHeaderProps {
@@ -57,6 +57,7 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
                 {
                     isAdmin && (
                         <DropdownMenuItem
+                            onClick={() => onOpen("editServer", { server })}
                             className='px-3 py-2 text-sm cursor-pointer'
                         >
                             Server Settings
@@ -66,8 +67,21 @@ const ServerHeader = ({ server, role }: ServerHeaderProps) => {
                     )
                 }
                 {
+                    isAdmin && (
+                        <DropdownMenuItem
+                            onClick={() => onOpen("members", { server })}
+                            className='px-3 py-2 text-sm cursor-pointer'
+                        >
+                            Manage Members
+                            <User className='h-4 w-4 ml-auto' />
+                        </DropdownMenuItem>
+
+                    )
+                }
+                {
                     isModerator && (
                         <DropdownMenuItem
+
                             className='px-3 py-2 text-sm cursor-pointer'
                         >
                             Create Channel
